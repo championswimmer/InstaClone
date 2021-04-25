@@ -3,23 +3,20 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/mobile_navigation"
-        app:startDestination="@+id/navigation_home">
+        app:startDestination="@+id/navigation_top">
 
     <fragment
-            android:id="@+id/navigation_home"
-            android:name="com.scaler.instaclone.ui.home.HomeFragment"
-            android:label="@string/title_home"
-            tools:layout="@layout/fragment_home" />
-
+            android:id="@+id/navigation_top"
+            android:name="com.scaler.instaclone.ui.feed.FeedFragment"
+            android:label="@string/nav_title_top"
+            tools:layout="@layout/fragment_home">
+        <argument android:name="@string/arg_feed_section" android:defaultValue="top" app:argType="string" />
+    </fragment>
     <fragment
-            android:id="@+id/navigation_dashboard"
-            android:name="com.scaler.instaclone.ui.dashboard.DashboardFragment"
-            android:label="@string/title_dashboard"
-            tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-            android:id="@+id/navigation_notifications"
-            android:name="com.scaler.instaclone.ui.notifications.NotificationsFragment"
-            android:label="@string/title_notifications"
-            tools:layout="@layout/fragment_notifications" />
+            android:id="@+id/navigation_hot"
+            android:name="com.scaler.instaclone.ui.feed.FeedFragment"
+            android:label="@string/nav_title_hot"
+            tools:layout="@layout/fragment_home">
+        <argument android:name="@string/arg_feed_section" android:defaultValue="hot" app:argType="string" />
+    </fragment>
 </navigation>

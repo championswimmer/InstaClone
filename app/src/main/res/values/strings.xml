@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">InstaClone</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+    <string name="arg_feed_section">SECTION</string>
+
+    <string name="nav_title_hot">Hot</string>
+    <string name="nav_title_top">Top</string>
+
 </resources>
