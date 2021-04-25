@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.scaler.instaclone.R
 import com.scaler.instaclone.databinding.FragmentFeedBinding
 
@@ -17,6 +18,7 @@ class FeedFragment : Fragment() {
     }
 
     private val viewModel: FeedViewModel by viewModels()
+    private val feedRecyclerAdapter = FeedRecyclerAdapter()
     private lateinit var sectionType: String
     private lateinit var binding: FragmentFeedBinding
 
@@ -33,6 +35,8 @@ class FeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFeedBinding.inflate(inflater, container, false)
+        binding.feedRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.feedRecyclerView.adapter = feedRecyclerAdapter
         return binding.root
     }
 
@@ -40,11 +44,7 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.images.observe(viewLifecycleOwner) {
-            Toast.makeText(
-                requireContext(),
-                "${it.size} images have been fetched",
-                Toast.LENGTH_SHORT
-            ).show()
+            feedRecyclerAdapter.submitList(it)
         }
     }
 

@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.scaler.instaclone.R
 import com.scaler.instaclone.databinding.ListItemImageBinding
 import com.scaler.libimgur.models.Image
 
@@ -34,6 +36,20 @@ class FeedRecyclerAdapter() :
     }
 
     override fun onBindViewHolder(holder: FeedImageViewHolder, position: Int) {
-        holder.binding.descTextView.text = getItem(position)?.title
+        val image = getItem(position)!!
+
+        val imageUrl = if (image.isAlbum == true && image.imagesCount != 0) {
+            val firstImage = image.images?.get(0)
+            firstImage?.link
+        } else {
+            image.link
+        }
+
+        holder.binding.descTextView.text = image.title
+        holder.binding.imageView.load(imageUrl) {
+            placeholder(R.drawable.placeholder)
+        }
+
+
     }
 }

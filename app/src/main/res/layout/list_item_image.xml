@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
 
     <ImageView
+            android:scaleType="centerCrop"
             tools:background="@color/black"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
