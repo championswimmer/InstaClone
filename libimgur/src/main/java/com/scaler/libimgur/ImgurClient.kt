@@ -12,23 +12,27 @@ class ImgurClient {
         const val API_KEY = "16abb74c6e5c7e8" // TODO: take this from app side
     }
 
-    val httpClient = OkHttpClient.Builder()
-        .addInterceptor { chain ->
-            val oldRequest = chain.request()
-            val newRequest = oldRequest.newBuilder()
-                .addHeader("Authorization", "Client-ID $API_KEY")
-                .build()
-            chain.proceed(newRequest)
-        }
-        .build()
+    private val httpClient by lazy {
+        OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val oldRequest = chain.request()
+                val newRequest = oldRequest.newBuilder()
+                    .addHeader("Authorization", "Client-ID $API_KEY")
+                    .build()
+                chain.proceed(newRequest)
+            }
+            .build()
+    }
 
-    val retrofit = Retrofit.Builder()
-        .client(httpClient)
-        .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build()
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .client(httpClient)
+            .baseUrl(BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    }
 
-    val api = retrofit.create(ImgurApiV3::class.java)
+    val api by lazy { retrofit.create(ImgurApiV3::class.java) }
 
 
 
